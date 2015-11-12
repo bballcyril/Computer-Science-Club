@@ -35,7 +35,7 @@ void draw(){
      noWallY2 = false; 
   }
     counter++;
-    if(counter < 60){
+    if(counter < 60){//Open and close
        pt1 -= radians(1);
        pt2 += radians(1);
     }else if(counter > 60 && counter < 120){
@@ -46,25 +46,26 @@ void draw(){
     }
 //    print(counter);
     fill(255, 255, 0);
-  arc(x, y, d, d, pt1, pt2);
+  arc(x, y, d, d, pt1, pt2);//Pac-man
  if(keyPressed){
-  if(keyCode == LEFT){
+  if(keyCode == LEFT){//Moves pacman left
     isLeft = true; isRight = false; isUp = false; isDown = false;
     pt1 = radians(230); pt2 = radians(490); counter = 0;
   }
-  if(keyCode == RIGHT){
+  if(keyCode == RIGHT){//Moves pacman right
     isLeft = false; isRight = true; isUp = false; isDown = false;
     pt1 = radians(50); pt2 = radians(310); counter = 0;
   }
-  if(keyCode == UP){
+  if(keyCode == UP){//Moves pacman up
     isLeft = false; isRight = false; isUp = true; isDown = false;
     pt1 = radians(320); pt2 = radians(580); counter = 0;
   }
-  if(keyCode == DOWN){
+  if(keyCode == DOWN){//Moves pacman down
     isLeft = false; isRight = false; isUp = false; isDown = true;
     pt1 = radians(140); pt2 = radians(400); counter = 0;
   }
  }
+ //Boundaries
  if(isLeft && noWallX1){
     x--; 
  }
