@@ -31,20 +31,21 @@ float betwY;
 boolean isDown; boolean isUp; boolean isLeft; boolean isRight;
 
 void setup(){
-  size(1000, 600);
+  size(1000, 1000);
 }
 
-void draw(){
+void draw(){ 
+   background(0);
   frameRate(120);
   lineCounter1 = 0;
   lineCounter2 = 0;
-  numBoxesW = 26;
-  numBoxesH = 32;
+  numBoxesW = 26;//dimensions
+  numBoxesH = 32;//dimensions
   linesW = new float[numBoxesW+1];
   linesH = new float[numBoxesH+1];
   boxStartY = 20;
   boxStartX = 40;
-  boxHeight = 550;
+  boxHeight = 700;
   boxWidth = 800;
   betwX = boxWidth/numBoxesW;
   betwY = boxHeight/numBoxesH;
@@ -72,7 +73,6 @@ void draw(){
   if(y == height-d/2){
      noWallY2 = false; 
   }
-  background(0);
     counter++;
     if(counter < 60){
        pt1 -= radians(1);
@@ -160,4 +160,5 @@ for(float f = boxStartX;f <= boxWidth+boxStartX;f+=betwX){ //X
   rect(linesW[21], linesH[22], betwX*2, betwY*5);
   rect(linesW[21], linesH[22], betwX*3, betwY*2);
   rect(linesW[21], linesH[16], betwX*4, betwY*5);
+  
 }
