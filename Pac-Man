@@ -1,6 +1,6 @@
 int x = 100;
 int y = height/2;
-int d = 20;
+int d = 15;
 int r = d/2;
 int linesY = 6;
 int linesX = 5;
@@ -44,9 +44,9 @@ void draw(){
   linesW = new float[numBoxesW+1];
   linesH = new float[numBoxesH+1];
   boxStartY = 20;
-  boxStartX = 40;
-  boxHeight = 700;
-  boxWidth = 800;
+  boxStartX = 20;
+  boxHeight = 500;
+  boxWidth = 600;
   betwX = boxWidth/numBoxesW;
   betwY = boxHeight/numBoxesH;
   if(x == boxStartX+r){
@@ -149,16 +149,11 @@ for(float f = boxStartX;f <= boxWidth+boxStartX;f+=betwX){ //X
 }
   fill(0,255, 0);
   noStroke();
-  rect(linesW[0], linesH[0], betwX, betwY*32);
-  rect(linesW[0], linesH[0], betwX*26, betwY);
-  rect(linesW[25], linesH[0], betwX, betwY*32);
-  rect(linesW[0], linesH[31], betwX*26, betwY);
-  rect(linesW[14], linesH[28], betwX*10, betwY*2);
-  rect(linesW[18], linesH[25], betwX*2, betwY*4);
-  rect(linesW[18], linesH[16], betwX*2, betwY*5);
-  rect(linesW[15], linesH[22], betwX*5, betwY*2);
-  rect(linesW[21], linesH[22], betwX*2, betwY*5);
-  rect(linesW[21], linesH[22], betwX*3, betwY*2);
-  rect(linesW[21], linesH[16], betwX*4, betwY*5);
+  walls(0, 0, 2, 2);
+  
+}
+
+void walls(int x, int y, int numX, int numY){
+  rect(linesW[x], linesH[y], betwX*numX, betwY*numY);
   
 }
