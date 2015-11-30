@@ -1,5 +1,5 @@
 int x = 100;
-int y = height/2;
+int y = 35;
 int d = 15;
 int r = d/2;
 int linesY = 6;
