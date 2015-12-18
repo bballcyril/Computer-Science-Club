@@ -11,22 +11,22 @@ float pt1 = radians(50); float pt2 = radians(310);
 //float pt3 = radians(140); float pt4 = radians(400);
 int counter = 0;
 boolean closeMouth;
-boolean noWallX1 = true;
-boolean noWallX2 = true;
-boolean noWallY1 = true;
-boolean noWallY2 = true;
-int numBoxesW;
-int numBoxesH;
+boolean wLeft;
+boolean wRight;
+boolean wUp;
+boolean wDown;
+int numBoxesW = 20;
+int numBoxesH = 20;
 int lineCounter1;
 int lineCounter2;
-float[] linesW;
-float[] linesH;
-float boxHeight;
-float boxWidth;
-float boxStartX;
-float boxStartY;
-float betwX;
-float betwY;
+float[] linesW = new float[numBoxesW+1];
+float[] linesH = new float[numBoxesH+1];
+float boxHeight = 600;
+float boxWidth = 480;
+float boxStartX = 20;
+float boxStartY = 20;
+float betwX = boxWidth/numBoxesW;
+float betwY = boxHeight/numBoxesH;
 
 boolean isDown; boolean isUp; boolean isLeft; boolean isRight;
 
@@ -39,39 +39,17 @@ void draw(){
   frameRate(120);
   lineCounter1 = 0;
   lineCounter2 = 0;
-  numBoxesW = 26;//dimensions
-  numBoxesH = 32;//dimensions
-  linesW = new float[numBoxesW+1];
-  linesH = new float[numBoxesH+1];
-  boxStartY = 20;
-  boxStartX = 20;
-  boxHeight = 500;
-  boxWidth = 600;
-  betwX = boxWidth/numBoxesW;
-  betwY = boxHeight/numBoxesH;
   if(x == boxStartX+r){
-    noWallX1 = false;
+    wLeft = true;
   }
   if(x == boxStartX+boxWidth-r){
-    noWallX2 = false; 
+    wRight = true; 
   }
   if(y == boxStartY+r){
-    noWallY1 = false; 
+    wUp = true; 
   }
   if(y == boxStartY+boxHeight-r){
-    noWallY2 = false; 
-  }
-  if(x == d/2){
-     noWallX1 = false; 
-  }
-  if(x == width-d/2){
-     noWallX2 = false; 
-  }
-  if(y == d/2){
-     noWallY1 = false; 
-  }
-  if(y == height-d/2){
-     noWallY2 = false; 
+    wDown = true; 
   }
     counter++;
     if(counter < 60){
@@ -83,7 +61,6 @@ void draw(){
     }else if(counter > 120){
        counter = 0; 
     }
-//    print(counter);
     fill(255, 255, 0);
     noStroke();
   arc(x, y, d, d, pt1, pt2);
@@ -105,33 +82,33 @@ void draw(){
     pt1 = radians(140); pt2 = radians(400); counter = 0;
   }
  }
- if(isLeft && noWallX1){
+ if(isLeft && !wLeft){
     x--; 
  }
- if(isRight && noWallX2){
+ if(isRight && !wRight){
     x++; 
  }
- if(isUp && noWallY1){
+ if(isUp && !wUp){
     y--; 
  }
- if(isDown && noWallY2){
+ if(isDown && !wDown){
     y++; 
  }
- if(!noWallX1){
+ if(wLeft){
    x++;
-   noWallX1 = true;
+   wLeft = false;
  }
-  if(!noWallX2){
+  if(wRight){
    x--;
-   noWallX2 = true;
+   wRight = false;
  }
-  if(!noWallY1){
+  if(wUp){
    y++;
-   noWallY1 = true;
+   wUp = false;
  }
-  if(!noWallY2){
+  if(wDown){
    y--;
-   noWallY2 = true;
+   wDown = false;
  }
  stroke(255, 0, 0);
  strokeWeight(2);
@@ -149,11 +126,57 @@ for(float f = boxStartX;f <= boxWidth+boxStartX;f+=betwX){ //X
 }
   fill(0,255, 0);
   noStroke();
-  walls(0, 0, 2, 2);
-  
+  //border(blocked direction, blocked start point, blocked end point, point of blocking);
+  //1 = left, 2 = right, 3 = up, 4 = down
+  //The blocked lines are darkly colored, don't know how to change it to a different color
+  border(1, 1, 5, 1);
+  border(2, 1, 5, 5);
+  border(3, 1, 5, 1);
+  border(4, 1, 5, 5);
 }
 
 void walls(int x, int y, int numX, int numY){
   rect(linesW[x], linesH[y], betwX*numX, betwY*numY);
-  
+}
+void border(int direction, int block1, int block2, int point){ //1 = left, 2 = right, 3 = Up, 4 = down
+    if(direction == 1){
+      if(y > linesH[block1] && y < linesH[block2]){
+         if(x == linesW[point]+r){
+           wLeft = true;
+         }
+      }
+      stroke(0, 255, 0);
+      stroke(15);
+      line(linesW[point], linesH[block1], linesW[point], linesH[block2]);
+    }
+        if(direction == 2){
+      if(y > linesH[block1] && y < linesH[block2]){
+         if(x == linesW[point]-r){
+           wRight = true;
+         }
+      }
+      stroke(0, 255, 0);
+      stroke(15);
+      line(linesW[point], linesH[block1], linesW[point], linesH[block2]);
+    }
+        if(direction == 3){
+      if(x > linesW[block1] && x < linesW[block2]){
+         if(y == linesH[point]+r){
+           wUp = true;
+         }
+      }
+      stroke(0, 255, 0);
+      stroke(15);
+      line(linesW[block1], linesH[point], linesW[block2], linesH[point]);
+    }
+        if(direction == 4){
+      if(x > linesW[block1] && x < linesW[block2]){
+         if(y == linesH[point]-r){
+           wDown = true;
+         }
+      }
+      stroke(0, 255, 0);
+      stroke(15);
+      line(linesW[block1], linesH[point], linesW[block2], linesH[point]);
+    }
 }
