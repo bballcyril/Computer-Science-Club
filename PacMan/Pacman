@@ -23,7 +23,7 @@ float[] linesW = new float[numBoxesW+1];
 float[] linesH = new float[numBoxesH+1];
 float boxHeight = 600;
 float boxWidth = 480;
-float boxStartX = 20;
+float boxStartX = 25;
 float boxStartY = 20;
 float betwX = boxWidth/numBoxesW;
 float betwY = boxHeight/numBoxesH;
@@ -31,7 +31,7 @@ float betwY = boxHeight/numBoxesH;
 boolean isDown; boolean isUp; boolean isLeft; boolean isRight;
 
 void setup(){
-  size(1000, 1000);
+  size(530, 650);
 }
 
 void draw(){ 
@@ -129,6 +129,18 @@ for(float f = boxStartX;f <= boxWidth+boxStartX;f+=betwX){ //X
   //border(blocked direction, blocked start point, blocked end point, point of blocking);
   //1-LEFT, 2-RIGHT, 3-UP, 4-DOWN
   //The blocked lines are darkly colored, don't know how to change it to a different color
+  //BorderIO boxes both inside and outside of border
+  //When you use border IO, it doesn't matter if you choose 1 or 2, and 3 or 4
+  
+  //Spawn Box - Allowed Pacman to enter
+  //Borders are blocked inside and outside
+  borderIO(1, 9, 11, 12);
+  borderIO(2, 9, 11, 8);
+  borderIO(3, 8, 12, 11);
+  borderIO(4, 8, 9, 9);
+  borderIO(4, 11, 12, 9);
+  borderIO(1, 9, 10, 9);
+  borderIO(1, 9, 10, 11);
   
   //Top Left
   border(2, 1, 5, 1);
@@ -147,7 +159,7 @@ for(float f = boxStartX;f <= boxWidth+boxStartX;f+=betwX){ //X
   border(3, 1, 5, 19);
   //Bottom Right
   border(2, 15, 19, 15);
-    border(1, 15, 19, 19);
+  border(1, 15, 19, 19);
   border(3, 15, 19, 19);
   border(4, 15, 19, 15);
   
@@ -198,4 +210,15 @@ void border(int direction, int block1, int block2, int point){ //1 = left, 2 = r
       stroke(15);
       line(linesW[block1], linesH[point], linesW[block2], linesH[point]);
     }
+}
+
+void borderIO(int a, int b, int c, int d){
+     if(a == 1 || a == 3){
+        border(a, b, c, d);
+        border(a+1, b, c, d);
+     }
+     if(a == 2 || a == 4){
+        border(a, b, c, d);
+        border(a-1, b, c, d);
+     }
 }
