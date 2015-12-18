@@ -1,34 +1,27 @@
-int x = 100;
-int y = 35;
-int d = 15;
-int r = d/2;
-int linesY = 6;
-int linesX = 5;
-float multiplier = 1.5;
-float lane = height/multiplier;
+int x = 100; //X Coordinate of Pac-Man
+int y = 35; //Y Coordinate of Pac-Man
+int d = 15; //Diameter of Pacman
+int r = d/2; //Radius of Pacman (As so not to always type d/2)
 float pt1 = radians(50); float pt2 = radians(310);
-//float pt1 = radians(50); float pt2 = radians(310);
-//float pt3 = radians(140); float pt4 = radians(400);
-int counter = 0;
-boolean closeMouth;
-boolean wLeft;
-boolean wRight;
+int counter = 0; //Timer for how Pac-Man moving mouth
+boolean wLeft; //Booleans that become true if wall is blocking in that direction
+boolean wRight; //w stands for Wall
 boolean wUp;
 boolean wDown;
-int numBoxesW = 20;
-int numBoxesH = 20;
-int lineCounter1;
-int lineCounter2;
-float[] linesW = new float[numBoxesW+1];
-float[] linesH = new float[numBoxesH+1];
-float boxHeight = 600;
-float boxWidth = 480;
-float boxStartX = 25;
-float boxStartY = 20;
-float betwX = boxWidth/numBoxesW;
-float betwY = boxHeight/numBoxesH;
+int numBoxesW = 20; //Number of Boxes in Width
+int numBoxesH = 20; //Number of Boxes in Height
+int lineCounter1; //Used in for loop for creating lines in box
+int lineCounter2; //Used in for loop for creating lines in box
+float[] linesW = new float[numBoxesW+1]; //Array holding each box corners' X coordinate
+float[] linesH = new float[numBoxesH+1]; //Array holding each box corners' Y coordinate
+float boxHeight = 600; //Name says it all
+float boxWidth = 480; //Name says it all
+float boxStartX = 25; //Starting X of top left corner
+float boxStartY = 20; //Starting Y of top left corner
+float betwX = boxWidth/numBoxesW; //Space between boxes horizontally or sideways
+float betwY = boxHeight/numBoxesH; //Space between boxes vertically or up and down
 
-boolean isDown; boolean isUp; boolean isLeft; boolean isRight;
+boolean isDown; boolean isUp; boolean isLeft; boolean isRight; //Booleans determining which direction pac-man is facing
 
 void setup(){
   size(530, 650);
