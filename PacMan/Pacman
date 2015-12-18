@@ -130,6 +130,7 @@ for(float f = boxStartX;f <= boxWidth+boxStartX;f+=betwX){ //X
   //1-LEFT, 2-RIGHT, 3-UP, 4-DOWN
   //The blocked lines are darkly colored, don't know how to change it to a different color
   //BorderIO boxes both inside and outside of border
+  //IO stands for INSIDE/OUTSIDE if you're wondering
   //When you use border IO, it doesn't matter if you choose 1 or 2, and 3 or 4
   
   //Spawn Box - Allowed Pacman to enter
