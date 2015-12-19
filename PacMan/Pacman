@@ -128,6 +128,135 @@ for(float f = boxStartX;f <= boxWidth+boxStartX;f+=betwX){ //X
   
   //Spawn Box - Allowed Pacman to enter
   //Borders are blocked inside and outside
+  
+  //NEW BORDER BOX COMMAND
+  //borderBox(Box X coordinate, Box Y coordinate, width (up and down), length (left to right);
+  borderBox(6, 6, 2, 3);
+  borderBox(11, 6, 2, 3);
+  
+  borderBox(6, 12, 2, 3);
+  borderBox(11, 12, 2, 3);
+  
+  borderBox(15, 6, 1, 4);
+  borderBox(13, 1, 4, 1);
+  
+  borderBox(6, 1, 4, 1);
+  borderBox(1, 6, 1, 4);
+  
+  borderBox(15, 13, 1, 4);
+  borderBox(13, 15, 4, 1);
+  
+  borderBox(6, 15, 4, 1);
+  borderBox(1, 13, 1, 4);
+  
+  borderIO(1, 9, 11, 12);
+  borderIO(2, 9, 11, 8);
+  borderIO(3, 8, 12, 11);
+  borderIO(4, 8, 9, 9);
+  borderIO(4, 11, 12, 9);
+  borderIO(1, 9, 10, 9);
+  borderIO(1, 9, 10, 11);
+  
+  //Top Left
+  border(2, 1, 5, 1);
+  border(1, 1, 5, 5);
+  border(4, 1, 5, 1);
+  border(3, 1, 5, 5);
+  //Top Right
+  border(1, 1, 5, 19);
+  border(2, 1, 5, 15);
+  border(4, 15, 19, 1);
+  border(3, 15, 19, 5);
+  //Bottom Left
+  border(2, 15, 19, 1);
+  border(1, 15, 19, 5);
+  border(4, 1, 5, 15);
+  border(3, 1, 5, 19);
+  //Bottom Right
+  border(2, 15, 19, 15);
+  border(1, 15, 19, 19);
+  border(3, 15, 19, 19);
+  border(4, 15, 19, 15);
+  
+  
+}
+
+void walls(int x, int y, int numX, int numY){
+  rect(linesW[x], linesH[y], betwX*numX, betwY*numY);
+}
+void border(int direction, int block1, int block2, int point){ //1 = left, 2 = right, 3 = Up, 4 = down
+    if(direction == 1){
+      if(y >= linesH[block1]-r && y <= linesH[block2]+r){
+         if(x == linesW[point]+r){
+           wLeft = true;
+         }
+      }
+      stroke(0, 255, 0);
+      stroke(15);
+      line(linesW[point], linesH[block1], linesW[point], linesH[block2]);
+    }
+        if(direction == 2){
+      if(y >= linesH[block1]-r && y <= linesH[block2]+r){
+         if(x == linesW[point]-r){
+           wRight = true;
+         }
+      }
+      stroke(0, 255, 0);
+      stroke(15);
+      line(linesW[point], linesH[block1], linesW[point], linesH[block2]);
+    }
+        if(direction == 3){
+      if(x >= linesW[block1]-r && x <= linesW[block2]+r){
+         if(y == linesH[point]+r){
+           wUp = true;
+         }
+      }
+      stroke(0, 255, 0);
+      stroke(15);
+      line(linesW[block1], linesH[point], linesW[block2], linesH[point]);
+    }
+        if(direction == 4){
+      if(x >= linesW[block1]-r && x <= linesW[block2]+r){
+         if(y == linesH[point]-r){
+           wDown = true;
+         }
+      }
+      stroke(0, 255, 0);
+      stroke(15);
+      line(linesW[block1], linesH[point], linesW[block2], linesH[point]);
+    }
+}
+
+void borderIO(int a, int b, int c, int d){
+     if(a == 1 || a == 3){
+        border(a, b, c, d);
+        border(a+1, b, c, d);
+     }
+     if(a == 2 || a == 4){
+        border(a, b, c, d);
+        border(a-1, b, c, d);
+     }
+}
+
+void borderBox(int xcoord, int ycoord, int w, int l){
+     border(2, ycoord, ycoord+w, xcoord);
+     border(4, xcoord, xcoord+l, ycoord);
+     border(3, xcoord, xcoord+l, ycoord+w);
+     border(1, ycoord, ycoord+w, xcoord+l);
+}
+  lineCounter2++;
+}
+  fill(0,255, 0);
+  noStroke();
+  //border(blocked direction, blocked start point, blocked end point, point of blocking);
+  //1-LEFT, 2-RIGHT, 3-UP, 4-DOWN
+  //The blocked lines are darkly colored, don't know how to change it to a different color
+  //BorderIO boxes both inside and outside of border
+  //IO stands for INSIDE/OUTSIDE if you're wondering
+  //When you use border IO, it doesn't matter if you choose 1 or 2, and 3 or 4
+  
+  //Spawn Box - Allowed Pacman to enter
+  //Borders are blocked inside and outside
   borderIO(1, 9, 11, 12);
   borderIO(2, 9, 11, 8);
   borderIO(3, 8, 12, 11);
