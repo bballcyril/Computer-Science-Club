@@ -131,6 +131,8 @@ for(float f = boxStartX;f <= boxWidth+boxStartX;f+=betwX){ //X
   
   //NEW BORDER BOX COMMAND
   //borderBox(Box X coordinate, Box Y coordinate, width (up and down), length (left to right);
+  borderIO(1, 0, 1, 1);
+  
   borderBox(6, 6, 2, 3);
   borderBox(11, 6, 2, 3);
   
@@ -181,7 +183,7 @@ for(float f = boxStartX;f <= boxWidth+boxStartX;f+=betwX){ //X
   
 }
 
-void walls(int x, int y, int numX, int numY){
+void colorWalls(int x, int y, int numX, int numY){ //USE FOR CREATING COLORED RECTANGLES IN MAP
   rect(linesW[x], linesH[y], betwX*numX, betwY*numY);
 }
 void border(int direction, int block1, int block2, int point){ //1 = left, 2 = right, 3 = Up, 4 = down
@@ -244,4 +246,3 @@ void borderBox(int xcoord, int ycoord, int w, int l){
      border(3, xcoord, xcoord+l, ycoord+w);
      border(1, ycoord, ycoord+w, xcoord+l);
 }
-
